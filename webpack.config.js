@@ -36,6 +36,10 @@ module.exports = function(env) {
 					use: "url-loader?limit=25000"
 				},
 				{
+					test: /\.scss$/,
+					use: [ MiniCssExtractPlugin.loader, "css-loader", "sass-loader" ]
+				},
+				{
 					test: /\.(less|css)$/,
 					use: [ MiniCssExtractPlugin.loader, "css-loader", "less-loader" ]
 				}
@@ -59,6 +63,9 @@ module.exports = function(env) {
 				APPNAME: `"${pack.name}"`,
 				PRODUCTION : production,
 				BUILD_AS_MODULE : (asmodule || standalone)
+			}),
+			new webpack.ProvidePlugin({
+				webix: '@xbs/webix-pro'
 			})
 		],
 		devServer:{
